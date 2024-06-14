@@ -14,18 +14,19 @@ model Owner {
   id      Int     @id @default(autoincrement())
   name    String
   email   String?
-  phone   String @unique
+  phone   String  @unique
   address String?
   dogs    Dog[]
 }
 
 model Dog {
-  id                 Int     @id @default(autoincrement())
-  name               String
-  breed              String
-  age                Int
-  image              String?
-  vaccinationStatus  String?
-  ownerId            Int
-  owner              Owner   @relation(fields: [ownerId], references: [id])
+  id           Int      @id @default(autoincrement())
+  name         String
+  breed        String
+  age          Int
+  image        String?
+  isVaccinated Boolean  @default(true)
+  castrated    Boolean? @default(false)
+  ownerId      Int
+  owner        Owner    @relation(fields: [ownerId], references: [id])
 }
