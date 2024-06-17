@@ -37,3 +37,6 @@ next-env.d.ts
 
 # private notes
 steg
+
+# database files
+*/**.db
