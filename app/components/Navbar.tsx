@@ -14,18 +14,20 @@ import {
   MenuItem,
   MenuList,
   Stack,
-  useColorModeValue,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { CgProfile } from "react-icons/cg";
 
 interface Props {
   children: React.ReactNode;
 }
 
-const Links = ["Dashboard", "Events", "About us"];
+export const Links = ["Dashboard", "Events", "About us"];
+export const logo = "Four legged bunch";
 
-const NavLink = (props: Props) => {
+export const NavLink = (props: Props) => {
   const { children } = props;
 
   return (
@@ -34,9 +36,10 @@ const NavLink = (props: Props) => {
       px={2}
       py={1}
       rounded={"md"}
+      fontWeight="bold"
+      textTransform="capitalize"
       _hover={{
-        textDecoration: "none",
-        bg: useColorModeValue("gray.200", "gray.700"),
+        zoom: "1.1",
       }}
       href={"#"}
     >
@@ -45,11 +48,11 @@ const NavLink = (props: Props) => {
   );
 };
 
-export default function Simple() {
+export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+    <Box bg="rgb(218, 215, 205)" px={4} color="rgb(52, 78, 65)">
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
         <IconButton
           size={"md"}
@@ -59,9 +62,17 @@ export default function Simple() {
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack spacing={8} alignItems={"center"}>
-          <Box fontSize="2xl" fontWeight="bold">
-            Four legged bunch
-          </Box>
+          <NextLink href="/">
+            <Text
+              fontSize="2xl"
+              fontWeight="bold"
+              _hover={{ zoom: "1.5" }}
+              textDecor="none"
+              borderRadius="md"
+            >
+              {logo}
+            </Text>
+          </NextLink>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
             {Links.map((link) => (
               <NavLink key={link}>{link}</NavLink>
@@ -77,7 +88,7 @@ export default function Simple() {
               cursor={"pointer"}
               minW={0}
             >
-              <Icon color="black" boxSize={10}>
+              <Icon color="rgb(52, 78, 65)" boxSize={10}>
                 <CgProfile />
               </Icon>
             </MenuButton>

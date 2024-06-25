@@ -1,4 +1,12 @@
-import { Box, Flex, GridItem, Image, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  GridItem,
+  Heading,
+  Image,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
 import { Dog } from "@prisma/client";
 
 interface Props {
@@ -8,11 +16,12 @@ interface Props {
 export function DogList(props: Props) {
   return (
     <Box>
+      <Heading textAlign="center" m={8}>
+        List of all registed dogs
+      </Heading>
       <SimpleGrid
-        id="products-grid"
-        width="80%"
+        width="85%"
         m="2rem auto"
-        mt="5rem"
         columns={{ base: 1, md: 3, lg: 4 }}
         gap={5}
       >
@@ -23,25 +32,31 @@ export function DogList(props: Props) {
             transition={"transform 0.2s ease-in-out"}
             _hover={{ cursor: "pointer", transform: "scale(1.05)" }}
           >
-            <Flex flexDirection="column" height="100%">
+            <Flex
+              flexDirection="column"
+              height="100%"
+              bg="RGBA(163, 177, 138)"
+              borderRadius={8}
+            >
               <Box _hover={{ textDecoration: "none" }}>
                 <Image
                   src={dog.image || undefined}
                   alt={dog.name}
                   objectFit="cover"
                   width="100%"
-                  height="200px"
+                  height="300px"
                 />
                 <Flex
                   justifyContent="flex-start"
                   alignContent="center"
                   flexDirection="column"
-                  mt="1.5rem"
+                  m="1.5rem"
                 >
                   <Text
+                    fontSize={{ base: "18px", md: "20px", lg: "22px" }}
+                    textAlign="center"
                     fontWeight="semibold"
                     textTransform="capitalize"
-                    _hover={{ color: "brown" }}
                   >
                     {dog.name}
                   </Text>
