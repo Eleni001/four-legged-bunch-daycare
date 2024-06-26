@@ -8,6 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Dog } from "@prisma/client";
+import NextLink from "next/link";
 
 interface Props {
   dogs: Dog[];
@@ -38,30 +39,32 @@ export function DogList(props: Props) {
               bg="RGBA(163, 177, 138)"
               borderRadius={8}
             >
-              <Box _hover={{ textDecoration: "none" }}>
-                <Image
-                  src={dog.image || undefined}
-                  alt={dog.name}
-                  objectFit="cover"
-                  width="100%"
-                  height="300px"
-                />
-                <Flex
-                  justifyContent="flex-start"
-                  alignContent="center"
-                  flexDirection="column"
-                  m="1.5rem"
-                >
-                  <Text
-                    fontSize={{ base: "18px", md: "20px", lg: "22px" }}
-                    textAlign="center"
-                    fontWeight="semibold"
-                    textTransform="capitalize"
+              <NextLink href={`/dogs/${dog.id}`} key={dog.id}>
+                <Box _hover={{ textDecoration: "none" }}>
+                  <Image
+                    src={dog.image || undefined}
+                    alt={dog.name}
+                    objectFit="cover"
+                    width="100%"
+                    height="300px"
+                  />
+                  <Flex
+                    justifyContent="flex-start"
+                    alignContent="center"
+                    flexDirection="column"
+                    m="1.5rem"
                   >
-                    {dog.name}
-                  </Text>
-                </Flex>
-              </Box>
+                    <Text
+                      fontSize={{ base: "18px", md: "20px", lg: "22px" }}
+                      textAlign="center"
+                      fontWeight="semibold"
+                      textTransform="capitalize"
+                    >
+                      {dog.name}
+                    </Text>
+                  </Flex>
+                </Box>
+              </NextLink>
             </Flex>
           </GridItem>
         ))}
