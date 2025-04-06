@@ -13,7 +13,7 @@ async function main() {
             breed: "Miniture Schnauzer",
             age: 4,
             image: "",
-            castrated: true,
+            neutered: true,
           },
         ],
       },
