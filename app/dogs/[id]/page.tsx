@@ -78,6 +78,11 @@ export default async function DogDetail({ params }: PageProps) {
 
             <Text>{dog.neutered ? "Yes" : "No"}</Text>
           </HStack>
+          <HStack>
+            <Heading size={{ base: "md", lg: "lg" }}>Checked in: </Heading>
+
+            <Text>{dog.isCheckedIn ? "Yes" : "No"}</Text>
+          </HStack>
         </Stack>
       </SimpleGrid>
     </Container>
