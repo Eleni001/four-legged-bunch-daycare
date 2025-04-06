@@ -23,7 +23,7 @@ export function DogList(props: Props) {
       <SimpleGrid
         width="85%"
         m="2rem auto"
-        columns={{ base: 1, md: 3, lg: 4 }}
+        columns={{ base: 1, md: 2, lg: 3 }}
         gap={5}
       >
         {props.dogs.map((dog) => (
@@ -46,7 +46,7 @@ export function DogList(props: Props) {
                     alt={dog.name}
                     objectFit="cover"
                     width="100%"
-                    height="300px"
+                    height="350"
                   />
                   <Flex
                     justifyContent="flex-start"

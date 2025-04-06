@@ -26,7 +26,7 @@ export default async function DogDetail({ params }: PageProps) {
   return (
     <Container maxW={"7xl"}>
       <SimpleGrid
-        columns={{ base: 1, lg: 2 }}
+        columns={{ base: 1, md: 2, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
         py={{ base: 18, md: 24 }}
       >
@@ -35,10 +35,12 @@ export default async function DogDetail({ params }: PageProps) {
             rounded={"md"}
             alt={dog.name}
             src={dog.image || undefined}
+            /* objectFit="cover"
+            boxSize="100%" */
             fit={"cover"}
             align={"center"}
             w={"100%"}
-            h={{ base: "100%", sm: "400px", lg: "500px" }}
+            /*  h={{ base: "100%", sm: "75%" }} */
           />
         </Flex>
         <Stack
@@ -46,7 +48,7 @@ export default async function DogDetail({ params }: PageProps) {
           mt={4}
           fontSize={{ base: "20", lg: "23" }}
           divider={<StackDivider />}
-          overflow="hidden"
+          /*  overflow="hidden" */
         >
           <HStack>
             <Heading size={{ base: "md", lg: "lg" }}>Name: </Heading>
