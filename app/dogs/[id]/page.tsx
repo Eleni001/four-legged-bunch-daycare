@@ -1,4 +1,4 @@
-import { getAllDogs } from "@/app/actions/actions";
+import { getDogById } from "@/app/actions/actions";
 import PageNotFound from "@/app/components/PageNotFound";
 import {
   Container,
@@ -15,8 +15,7 @@ import {
 type PageProps = { params: { id: string } };
 
 export default async function DogDetail({ params }: PageProps) {
-  const dogs = await getAllDogs();
-  const dog = dogs.find((d) => d.id === Number(params.id));
+  const dog = await getDogById(Number(params.id));
   if (!dog) {
     return (
       <main>
