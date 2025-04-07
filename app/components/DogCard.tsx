@@ -1,20 +1,33 @@
-import { Box, Flex, Image,  Checkbox, Text } from "@chakra-ui/react";
-import { Dog } from "@prisma/client";
+"use client";
 
-interface Props{
- dog: Dog;
+import { Box, Checkbox, Flex, Image, Text } from "@chakra-ui/react";
+import { Dog } from "@prisma/client";
+import NextLink from "next/link";
+import { useEffect, useState } from "react";
+import { setDogCheckedIn } from "../actions/actions";
+
+interface Props {
+  dog: Dog;
 }
 
-export default function DogCard({dog}: Props) {
+export default function DogCard({ dog }: Props) {
+  const [checkedIn, setCheckedIn] = useState(dog.isCheckedIn);
+
+  useEffect(() => {
+    setDogCheckedIn(dog.id, checkedIn);
+  }, [checkedIn]);
+
   return (
     <Box _hover={{ textDecoration: "none" }}>
-      <Image
-        src={dog.image || undefined}
-        alt={dog.name}
-        objectFit="cover"
-        width="100%"
-        height="350"
-      />
+      <NextLink href={`/dogs/${dog.id}`} key={dog.id}>
+        <Image
+          src={dog.image || undefined}
+          alt={dog.name}
+          objectFit="cover"
+          width="100%"
+          height="350"
+        />
+      </NextLink>
       <Flex
         justifyContent="space-between"
         alignContent="center"
@@ -29,9 +42,10 @@ export default function DogCard({dog}: Props) {
         >
           {dog.name}
         </Text>
-        <Checkbox size="lg" colorScheme="green" isChecked={dog.isCheckedIn}>
-          Checked In
-        </Checkbox>
+        <Checkbox
+          isChecked={checkedIn}
+          onChange={(e) => setCheckedIn(!!e.target.checked)}
+        />
       </Flex>
     </Box>
   );

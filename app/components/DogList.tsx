@@ -32,9 +32,7 @@ export function DogList(props: Props) {
               bg="RGBA(163, 177, 138)"
               borderRadius={8}
             >
-              <NextLink href={`/dogs/${dog.id}`} key={dog.id}>
-                <DogCard dog={dog} />
-              </NextLink>
+              <DogCard dog={dog} />
             </Flex>
           </GridItem>
         ))}
