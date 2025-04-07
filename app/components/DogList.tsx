@@ -1,14 +1,7 @@
-import {
-  Box,
-  Flex,
-  GridItem,
-  Heading,
-  Image,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Flex, GridItem, Heading, SimpleGrid } from "@chakra-ui/react";
 import { Dog } from "@prisma/client";
 import NextLink from "next/link";
+import DogCard from "./DogCard";
 
 interface Props {
   dogs: Dog[];
@@ -40,30 +33,7 @@ export function DogList(props: Props) {
               borderRadius={8}
             >
               <NextLink href={`/dogs/${dog.id}`} key={dog.id}>
-                <Box _hover={{ textDecoration: "none" }}>
-                  <Image
-                    src={dog.image || undefined}
-                    alt={dog.name}
-                    objectFit="cover"
-                    width="100%"
-                    height="350"
-                  />
-                  <Flex
-                    justifyContent="flex-start"
-                    alignContent="center"
-                    flexDirection="column"
-                    m="1.5rem"
-                  >
-                    <Text
-                      fontSize={{ base: "18px", md: "20px", lg: "22px" }}
-                      textAlign="center"
-                      fontWeight="semibold"
-                      textTransform="capitalize"
-                    >
-                      {dog.name}
-                    </Text>
-                  </Flex>
-                </Box>
+                <DogCard dog={dog} />
               </NextLink>
             </Flex>
           </GridItem>

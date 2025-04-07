@@ -1,6 +1,7 @@
 import { getDogById } from "@/app/actions/actions";
 import PageNotFound from "@/app/components/PageNotFound";
 import {
+  Checkbox,
   Container,
   Flex,
   HStack,
@@ -79,9 +80,16 @@ export default async function DogDetail({ params }: PageProps) {
             <Text>{dog.neutered ? "Yes" : "No"}</Text>
           </HStack>
           <HStack>
-            <Heading size={{ base: "md", lg: "lg" }}>Checked in: </Heading>
+            <Heading size={{ base: "md", lg: "lg" }}>Checked In:</Heading>
+            <Checkbox
+              size="lg"
+              colorScheme="green"
+              isChecked={dog.isCheckedIn}
+            />
 
-            <Text>{dog.isCheckedIn ? "Yes" : "No"}</Text>
+            {/* <Heading size={{ base: "md", lg: "lg" }}>Checked in: </Heading>
+
+            <Text>{dog.isCheckedIn ? "Yes" : "No"}</Text> */}
           </HStack>
         </Stack>
       </SimpleGrid>
