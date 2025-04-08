@@ -1,6 +1,7 @@
 import { db } from "./db";
 
 async function main() {
+  await db.owner.deleteMany();
   await db.owner.create({
     data: {
       name: "Eleni Solomon-Samuelsson",

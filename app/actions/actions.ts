@@ -12,8 +12,16 @@ export const getDogById = async (id: number) => {
 };
 
 export const setDogCheckedIn = async (id: number, checkedIn: boolean) => {
-  return await db.dog.update({
+  await db.dog.update({
     where: { id: id },
     data: { isCheckedIn: checkedIn },
+  });
+};
+
+export const deleteDog = async (id: number) => {
+  await db.dog.delete({
+    where: {
+      id: id,
+    },
   });
 };

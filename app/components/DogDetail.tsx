@@ -1,19 +1,26 @@
 "use client";
 
-import { setDogCheckedIn } from "@/app/actions/actions";
+import { deleteDog, setDogCheckedIn } from "@/app/actions/actions";
 import {
-    Checkbox,
+  Box,
+  Button,
+  Checkbox,
   Container,
   Flex,
   HStack,
   Heading,
   Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   SimpleGrid,
   Stack,
   StackDivider,
   Text,
 } from "@chakra-ui/react";
 import { Dog } from "@prisma/client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -22,17 +29,62 @@ interface Props {
 
 export default function DogDetail({ dog }: Props) {
   const [checkedIn, setCheckedIn] = useState(dog.isCheckedIn);
-
+  const [dogDeleted, setDogDeleted] = useState(false);
+  const router = useRouter();
   useEffect(() => {
     setDogCheckedIn(dog.id, checkedIn);
   }, [checkedIn]);
 
+  useEffect(() => {
+    if (dogDeleted) {
+      deleteDog(dog.id);
+      router.push("/");
+    }
+  }, [dogDeleted]);
+
+  const handleDeleteClick = () => {
+    setDogDeleted(true);
+  };
+
   return (
     <Container maxW={"7xl"}>
+      <Box display="flex" justifyContent="right">
+        <Menu>
+          <MenuButton
+            as={Button}
+            rounded={"full"}
+            variant={"link"}
+            cursor={"pointer"}
+            minW={0}
+            mt={6}
+          >
+            <Text
+              paddingTop={4}
+              fontSize={{ base: "xl", lg: "3xl" }}
+              color="darkgreen"
+              textDecor="underline"
+            >
+              Manage Dog
+            </Text>
+          </MenuButton>
+          <MenuList>
+            <MenuItem as="a" href={`product/${dog.id}`}>
+              <Button colorScheme="green" flexGrow={1}>
+                Edit
+              </Button>
+            </MenuItem>
+            <MenuItem as="div" onClick={() => handleDeleteClick()}>
+              <Button colorScheme="red" flexGrow={1}>
+                Delete
+              </Button>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Box>
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
-        py={{ base: 18, md: 24 }}
+        py={{ base: 14, md: 20 }}
       >
         <Flex>
           <Image
@@ -84,10 +136,6 @@ export default function DogDetail({ dog }: Props) {
               isChecked={checkedIn}
               onChange={(e) => setCheckedIn(!!e.target.checked)}
             />
-
-            {/* <Heading size={{ base: "md", lg: "lg" }}>Checked in: </Heading>
-
-            <Text>{dog.isCheckedIn ? "Yes" : "No"}</Text> */}
           </HStack>
         </Stack>
       </SimpleGrid>
