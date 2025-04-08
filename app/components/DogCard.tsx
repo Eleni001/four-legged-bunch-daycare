@@ -18,7 +18,7 @@ export default function DogCard({ dog }: Props) {
   }, [checkedIn]);
 
   return (
-    <Box _hover={{ textDecoration: "none" }}>
+    <Box _hover={{ textDecoration: "none" }} data-cy={"dog" + dog.name}>
       <NextLink href={`/dogs/${dog.id}`} key={dog.id}>
         <Image
           src={dog.image || undefined}
@@ -42,7 +42,7 @@ export default function DogCard({ dog }: Props) {
         >
           {dog.name}
         </Text>
-        <Checkbox
+        <Checkbox data-cy="check-box"
           isChecked={checkedIn}
           onChange={(e) => setCheckedIn(!!e.target.checked)}
         />

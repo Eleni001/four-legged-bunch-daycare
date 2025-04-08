@@ -1,6 +1,5 @@
 import { Box, Flex, GridItem, Heading, SimpleGrid } from "@chakra-ui/react";
 import { Dog } from "@prisma/client";
-import NextLink from "next/link";
 import DogCard from "./DogCard";
 
 interface Props {
@@ -10,7 +9,7 @@ interface Props {
 export function DogList(props: Props) {
   return (
     <Box>
-      <Heading textAlign="center" m={8}>
+      <Heading as="h1" textAlign="center" m={8}>
         List of all registed dogs
       </Heading>
       <SimpleGrid
@@ -18,6 +17,7 @@ export function DogList(props: Props) {
         m="2rem auto"
         columns={{ base: 1, md: 2, lg: 3 }}
         gap={5}
+        data-cy="dog-list"
       >
         {props.dogs.map((dog) => (
           <GridItem
