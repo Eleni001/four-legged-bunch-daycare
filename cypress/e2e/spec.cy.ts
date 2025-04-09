@@ -30,4 +30,17 @@ describe("template spec", () => {
     cy.url().should("include", "/dogs/");
     cy.get('[data-cy="dog-detailPixy"]').should("exist");
   });
+
+  it("should be possible to check in a dog from the detail page", () => {
+    cy.visit("/");
+    cy.get('[data-cy="dog-list"]').find('[data-cy="dogDella"]').click();
+    cy.url().should("include", "/dogs/");
+    cy.get('[data-cy="dog-detailDella"]').should("exist").find('[data-cy="check-box"]').first().click();
+
+    cy
+    .get(('[data-cy="dog-detailDella"]'))
+      .find('[data-cy="check-box"]')
+      .children(".chakra-checkbox__input")
+      .should("be.checked");
+  });
 });

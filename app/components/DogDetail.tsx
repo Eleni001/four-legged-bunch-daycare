@@ -133,9 +133,10 @@ export default function DogDetail({ dog }: Props) {
           </HStack>
           <HStack>
             <Heading size={{ base: "md", lg: "lg" }}>Checked In:</Heading>
-            <Checkbox
+            <Checkbox 
               isChecked={checkedIn}
               onChange={(e) => setCheckedIn(!!e.target.checked)}
+              data-cy="check-box"
             />
           </HStack>
         </Stack>
