@@ -2,7 +2,13 @@ describe("template spec", () => {
   beforeEach(() => {
     cy.task("reseed");
   });
-  it("should have the brand inside an h1 tag", () => {
+
+  it("should be possible view list of dogs", () => {
+    cy.visit("/");
+    cy.get('[data-cy="dog-list"]').should("have.length.at.least", 1).find('[data-cy="dogTore"]')
+  });
+  
+  it("should be possible to check in a dog", () => {
     cy.visit("/");
     cy.get('[data-cy="dog-list"]')
       .find('[data-cy="dogOscar Jr."]')
@@ -11,6 +17,8 @@ describe("template spec", () => {
 
     cy.get('[data-cy="dog-list"]')
       .find('[data-cy="dogOscar Jr."]')
-      .find('[data-cy="check-box"]').children(".chakra-checkbox__input").should("be.checked");
+      .find('[data-cy="check-box"]')
+      .children(".chakra-checkbox__input")
+      .should("be.checked");
   });
 });
