@@ -43,4 +43,16 @@ describe("template spec", () => {
       .children(".chakra-checkbox__input")
       .should("be.checked");
   });
+
+  it('should be possible to delete a dog from the detail page', () => {
+    cy.visit("/");
+    cy.get('[data-cy="dog-list"]').find('[data-cy="dogBuster"]').click();
+    cy.url().should("include", "/dogs/");
+    cy.get('[data-cy="dog-detailBuster"]').should("exist");
+
+    cy.get('[data-cy=manage-dog]').click();
+    cy.get('[data-cy=delete-button]').click();
+    cy.url().should('eq', Cypress.config().baseUrl + "/");
+    cy.get('[data-cy="dog-detailBuster"]').should('not.exist');
+  })
 });

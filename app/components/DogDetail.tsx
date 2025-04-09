@@ -57,6 +57,7 @@ export default function DogDetail({ dog }: Props) {
             cursor={"pointer"}
             minW={0}
             mt={6}
+            data-cy="manage-dog"
           >
             <Text
               paddingTop={4}
@@ -74,7 +75,7 @@ export default function DogDetail({ dog }: Props) {
               </Button>
             </MenuItem>
             <MenuItem as="div" onClick={() => handleDeleteClick()}>
-              <Button colorScheme="red" flexGrow={1}>
+              <Button colorScheme="red" flexGrow={1} data-cy="delete-button">
                 Delete
               </Button>
             </MenuItem>
@@ -133,7 +134,7 @@ export default function DogDetail({ dog }: Props) {
           </HStack>
           <HStack>
             <Heading size={{ base: "md", lg: "lg" }}>Checked In:</Heading>
-            <Checkbox 
+            <Checkbox
               isChecked={checkedIn}
               onChange={(e) => setCheckedIn(!!e.target.checked)}
               data-cy="check-box"
