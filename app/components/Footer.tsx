@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Container, HStack, Stack, Text } from "@chakra-ui/react";
-import { Links, NavLink, logo } from "./Navbar";
+import { logo } from "./Navbar";
 
 export default function Footer() {
   return (
@@ -17,11 +17,6 @@ export default function Footer() {
         <Box fontSize="2xl" fontWeight="bold">
           {logo}
         </Box>
-        <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
-          {Links.map((link) => (
-            <NavLink key={link}>{link}</NavLink>
-          ))}
-        </HStack>
       </Container>
 
       <Box
