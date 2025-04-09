@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Four Legged Bunch Daycare
 
-## Getting Started
+## Introduktion
 
-First, run the development server:
+Detta är ett skolprojekt där man ska skapa en webbapplikation (NextJS är rekommendationen) vars funktionalitet ska testas med Cypress E2E automatiserade testar. Man ska planera och skriva ner de huvudsakliga användarflödena för applikationen och skriva automatiserade E2E tester för dessa. Det ska skrivas tester på den förväntade användningen men även på vad som sker om användaren gör fel, ex matar in felaktiga värden.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Beskrivning
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+En NextJS applikation som är avsedd att för hunddagis där man kan ha koll på vilka kunder de har och ska kunna hantera sina kunder.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Startsidan
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Här kan man hitta en lista på alla registerade hundar.
+- Checka in och ut hund.
+- Lägga till en ny hund.
+- Clicka vidare till detaljsidan där man kan se mera information om en specifik hund.
 
-## Learn More
+### Detaljsidan
 
-To learn more about Next.js, take a look at the following resources:
+- Visar mer information om en specifik hund.
+- Checka in och ut hund.
+- Editera existerande hund information.
+- Ta bort en hund.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+För att sätta upp applikationen lokalt följ nedan steg:
 
-## Deploy on Vercel
+1. **Klona repot:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```sh
+   git clone https://github.com/Eleni001/four-legged-bunch-daycare.git
+   cd four-legged-bunch-daycare
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. **Installera beroenden:**
+
+   ```sh
+   npm install
+   ```
+
+3. **Skapa databasen:**
+
+   ```sh
+   npm run push
+   npm run seed
+   ```
+
+4. **Köra development servern:**
+
+   ```sh
+   npm run dev
+   ```
+
+## E2E-tester
+
+1. **Skapa test databasen:**
+
+   ```sh
+    npm run test:push
+   ```
+
+2. **Köra E2E tester:**
+
+   ```sh
+    npm run test:push
+   ```
