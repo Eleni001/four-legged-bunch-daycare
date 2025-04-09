@@ -70,7 +70,7 @@ export default function DogDetail({ dog }: Props) {
           </MenuButton>
           <MenuList>
             <MenuItem as="a" href={`/manage/${dog.id}`}>
-              <Button colorScheme="green" flexGrow={1}>
+              <Button colorScheme="green" flexGrow={1} data-cy="edit-button">
                 Edit
               </Button>
             </MenuItem>
@@ -107,7 +107,7 @@ export default function DogDetail({ dog }: Props) {
           <HStack>
             <Heading size={{ base: "md", lg: "lg" }}>Name: </Heading>
 
-            <Text>{dog.name}</Text>
+            <Text data-cy="name">{dog.name}</Text>
           </HStack>
 
           <HStack>

@@ -40,7 +40,7 @@ export default function DogForm({ dog }: Props) {
     }));
   };
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     updateDog({ ...formData, id: dog.id });
     router.push(`/dogs/${dog.id}`);
@@ -69,6 +69,7 @@ export default function DogForm({ dog }: Props) {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
+                data-cy="dog-name"
               />
             </HStack>
           </FormControl>
@@ -118,7 +119,12 @@ export default function DogForm({ dog }: Props) {
                 onChange={handleBooleanChange}
               />
             </HStack>
-            <Button colorScheme="green" width="full" type="submit">
+            <Button
+              colorScheme="green"
+              width="full"
+              type="submit"
+              data-cy="submit-button"
+            >
               Save
             </Button>
           </FormControl>

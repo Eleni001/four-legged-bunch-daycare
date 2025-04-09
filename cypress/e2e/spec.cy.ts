@@ -35,24 +35,41 @@ describe("template spec", () => {
     cy.visit("/");
     cy.get('[data-cy="dog-list"]').find('[data-cy="dogDella"]').click();
     cy.url().should("include", "/dogs/");
-    cy.get('[data-cy="dog-detailDella"]').should("exist").find('[data-cy="check-box"]').first().click();
+    cy.get('[data-cy="dog-detailDella"]')
+      .should("exist")
+      .find('[data-cy="check-box"]')
+      .first()
+      .click();
 
-    cy
-    .get(('[data-cy="dog-detailDella"]'))
+    cy.get('[data-cy="dog-detailDella"]')
       .find('[data-cy="check-box"]')
       .children(".chakra-checkbox__input")
       .should("be.checked");
   });
 
-  it('should be possible to delete a dog from the detail page', () => {
+  it("should be possible to delete a dog from the detail page", () => {
     cy.visit("/");
     cy.get('[data-cy="dog-list"]').find('[data-cy="dogBuster"]').click();
     cy.url().should("include", "/dogs/");
     cy.get('[data-cy="dog-detailBuster"]').should("exist");
 
-    cy.get('[data-cy=manage-dog]').click();
-    cy.get('[data-cy=delete-button]').click();
-    cy.url().should('eq', Cypress.config().baseUrl + "/");
-    cy.get('[data-cy="dog-detailBuster"]').should('not.exist');
-  })
+    cy.get("[data-cy=manage-dog]").click();
+    cy.get("[data-cy=delete-button]").click();
+    cy.url().should("eq", Cypress.config().baseUrl + "/");
+    cy.get('[data-cy="dog-detailBuster"]').should("not.exist");
+  });
+
+  it("should be possible to edit a dog from the detail page", () => {
+    cy.visit("/");
+    cy.get('[data-cy="dog-list"]').find('[data-cy="dogOscar Jr."]').click();
+    cy.url().should("include", "/dogs/");
+    cy.get('[data-cy="dog-detailOscar Jr."]').should("exist");
+
+    cy.get("[data-cy=manage-dog]").click();
+    cy.get("[data-cy=edit-button]").click();
+    cy.get("[data-cy=dog-name]").clear().type("Oscar");
+    cy.get("[data-cy=submit-button]").click();
+    cy.url().should("include", "/dogs/");
+    cy.get("[data-cy=name]").should("contain", "Oscar");
+  });
 });
