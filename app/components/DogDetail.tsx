@@ -85,6 +85,7 @@ export default function DogDetail({ dog }: Props) {
         columns={{ base: 1, md: 2, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
         py={{ base: 14, md: 20 }}
+        data-cy={"dog-detail" + dog.name}
       >
         <Flex>
           <Image
