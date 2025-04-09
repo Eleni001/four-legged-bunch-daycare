@@ -24,6 +24,32 @@ describe("template spec", () => {
       .should("be.checked");
   });
 
+  it("should be possible to check out a dog", () => {
+    cy.visit("/");
+    cy.get('[data-cy="dog-list"]')
+      .find('[data-cy="dogOscar Jr."]')
+      .find('[data-cy="check-box"]')
+      .click();
+
+    cy.get('[data-cy="dog-list"]')
+      .find('[data-cy="dogOscar Jr."]')
+      .find('[data-cy="check-box"]')
+      .children(".chakra-checkbox__input")
+      .should("be.checked");
+
+    cy.get('[data-cy="dog-list"]')
+      .find('[data-cy="dogOscar Jr."]')
+      .find('[data-cy="check-box"]')
+      .children(".chakra-checkbox__input")
+      .click({ force: true });
+
+    cy.get('[data-cy="dog-list"]')
+      .find('[data-cy="dogOscar Jr."]')
+      .find('[data-cy="check-box"]')
+      .children(".chakra-checkbox__input")
+      .should("not.be.checked");
+  });
+
   it("should be possible to navigate to and view a dog detail page", () => {
     cy.visit("/");
     cy.get('[data-cy="dog-list"]').find('[data-cy="dogPixy"]').click();
