@@ -4,6 +4,7 @@ import {
   Button,
   Checkbox,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Heading,
   HStack,
@@ -23,12 +24,15 @@ interface Props {
 export default function DogForm({ dog }: Props) {
   const [formData, setFormData] = useState(dog);
   const router = useRouter();
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
   const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
   const handleBooleanChange = (e: {
     target: { name: string; checked: boolean };
@@ -42,9 +46,19 @@ export default function DogForm({ dog }: Props) {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    const newErrors: { [key: string]: string } = {};
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.breed) newErrors.breed = "Breed is required";
+    if (!formData.age || isNaN(Number(formData.age)))
+      newErrors.age = "Age must be a number";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
     updateDog({ ...formData, id: dog.id });
     router.push(`/dogs/${dog.id}`);
-    console.log("Submitted:", formData);
+    //console.log("Submitted:", formData);
   };
 
   return (
@@ -62,7 +76,7 @@ export default function DogForm({ dog }: Props) {
           fontSize={{ base: "20", lg: "23" }}
         >
           <Heading textAlign="center">You are now Editing {dog.name}</Heading>
-          <FormControl>
+          <FormControl isInvalid={!!errors.name}>
             <HStack>
               <FormLabel fontSize={{ base: "lg", lg: "xl" }}>Name:</FormLabel>
               <Input
@@ -72,8 +86,9 @@ export default function DogForm({ dog }: Props) {
                 data-cy="dog-name"
               />
             </HStack>
+            <FormErrorMessage>{errors.name}</FormErrorMessage>
           </FormControl>
-          <FormControl>
+          <FormControl isInvalid={!!errors.breed}>
             <HStack>
               <FormLabel fontSize={{ base: "lg", lg: "xl" }}>Breed:</FormLabel>
               <Input
@@ -82,12 +97,14 @@ export default function DogForm({ dog }: Props) {
                 onChange={handleChange}
               />
             </HStack>
+            <FormErrorMessage>{errors.breed}</FormErrorMessage>
           </FormControl>
-          <FormControl>
+          <FormControl isInvalid={!!errors.age}>
             <HStack>
               <FormLabel fontSize={{ base: "lg", lg: "xl" }}>Age:</FormLabel>
               <Input name="age" value={formData.age} onChange={handleChange} />
             </HStack>
+            <FormErrorMessage>{errors.age}</FormErrorMessage>
           </FormControl>
           <FormControl>
             {" "}
@@ -104,8 +121,8 @@ export default function DogForm({ dog }: Props) {
             <HStack>
               <FormLabel size="lg">Neutered:</FormLabel>
               <Checkbox
-                isChecked={formData.isVaccinated}
-                name="isNeutered"
+                isChecked={formData.neutered}
+                name="neutered"
                 onChange={handleBooleanChange}
               />
             </HStack>
