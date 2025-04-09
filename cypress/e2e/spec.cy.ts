@@ -124,4 +124,25 @@ describe("template spec", () => {
     cy.url().should("include", "/dogs/");
     cy.get("[data-cy=name]").should("contain", "Oscar");
   });
+
+  it("should show error messages for possible invalid inputs", () => {
+    cy.visit("/");
+    cy.get('[data-cy="dog-list"]').find('[data-cy="dogOscar Jr."]').click();
+    cy.url().should("include", "/dogs/");
+    cy.get('[data-cy="dog-detailOscar Jr."]').should("exist");
+
+    cy.get("[data-cy=manage-dog]").click();
+    cy.get("[data-cy=edit-button]").click();
+    
+    cy.get('[data-cy="dog-name"]').clear();
+
+    cy.get('input[name="age"]').clear().type("four");
+
+    cy.get('[data-cy="submit-button"]').click();
+
+    cy.contains("Name is required").should("be.visible");
+    cy.contains("Age must be a number").should("be.visible");
+
+    cy.url().should("include", "/manage/");
+  });
 });
