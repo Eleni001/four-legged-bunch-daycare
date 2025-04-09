@@ -26,7 +26,7 @@ model Dog {
   age          Int
   image        String?
   isVaccinated Boolean  @default(true)
-  neutered     Boolean? @default(false)
+  neutered     Boolean @default(false)
   isCheckedIn  Boolean @default(false)
   ownerId      Int
   owner        Owner    @relation(fields: [ownerId], references: [id])
