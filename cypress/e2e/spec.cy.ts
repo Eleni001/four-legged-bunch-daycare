@@ -73,6 +73,32 @@ describe("template spec", () => {
       .should("be.checked");
   });
 
+  it("should be possible to check out a dog from the detail page", () => {
+    cy.visit("/");
+    cy.get('[data-cy="dog-list"]').find('[data-cy="dogDella"]').click();
+    cy.url().should("include", "/dogs/");
+    cy.get('[data-cy="dog-detailDella"]')
+      .should("exist")
+      .find('[data-cy="check-box"]')
+      .first()
+      .click();
+
+    cy.get('[data-cy="dog-detailDella"]')
+      .find('[data-cy="check-box"]')
+      .children(".chakra-checkbox__input")
+      .should("be.checked");
+
+    cy.get('[data-cy="dog-detailDella"]')
+      .find('[data-cy="check-box"]')
+      .children(".chakra-checkbox__input")
+      .click({ force: true });
+
+    cy.get('[data-cy="dog-detailDella"]')
+      .find('[data-cy="check-box"]')
+      .children(".chakra-checkbox__input")
+      .should("not.be.checked");
+  });
+
   it("should be possible to delete a dog from the detail page", () => {
     cy.visit("/");
     cy.get('[data-cy="dog-list"]').find('[data-cy="dogBuster"]').click();
