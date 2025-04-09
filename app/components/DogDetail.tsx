@@ -69,7 +69,7 @@ export default function DogDetail({ dog }: Props) {
             </Text>
           </MenuButton>
           <MenuList>
-            <MenuItem as="a" href={`product/${dog.id}`}>
+            <MenuItem as="a" href={`/manage/${dog.id}`}>
               <Button colorScheme="green" flexGrow={1}>
                 Edit
               </Button>
