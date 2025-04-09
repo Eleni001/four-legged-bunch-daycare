@@ -63,5 +63,5 @@ För att sätta upp applikationen lokalt följ nedan steg:
 2. **Köra E2E tester:**
 
    ```sh
-    npm run test:push
+    npm run test
    ```
